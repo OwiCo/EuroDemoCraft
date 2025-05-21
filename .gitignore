@@ -23,7 +23,7 @@ chrome-profiler-events*.json
 /.angular/cache/
 /.angular/
 *.sublime-workspace
-
+./memorea/
 # IDE - VSCode
 .vscode/*
 !.vscode/settings.json
