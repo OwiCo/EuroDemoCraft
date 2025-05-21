@@ -1,0 +1,58 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">Rod Cutting Optimizer</h1>
+
+  <p class="mb-4 text-sm text-gray-600">
+    This simulates a single-unit build of a EuroSlide Door using factory rod inventory and part cut requirements.
+  </p>
+
+  <button
+    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded shadow"
+    (click)="generateEstimate()">
+    Estimate Build
+  </button>
+<div class="mb-4">
+  <label class="block text-sm font-medium mb-1">How many units?</label>
+  <input type="number" min="1" [(ngModel)]="unitCount" class="border p-2 rounded w-32" />
+</div>
+
+  <div *ngIf="buildResult" class="mt-8 bg-white shadow p-6 rounded">
+    <h2 class="text-xl font-semibold mb-4">Result Summary</h2>
+
+    <p><strong>Buildable Units:</strong> {{ buildResult.unitsBuildable }}</p>
+
+    <div class="mt-4">
+      <h3 class="font-semibold">Used Rods:</h3>
+      <ul class="list-disc pl-6">
+        <li *ngFor="let rod of buildResult.used">
+          Rod <strong>{{ rod.rodId }}</strong>
+          <ul class="ml-4 list-disc text-sm text-gray-700">
+            <li *ngFor="let cut of rod.cuts">
+              - {{ cut.lengthMM }}mm for {{ cut.partId }}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    
+<p><strong>Requested Units:</strong> {{ unitCount }}</p>
+<p><strong>Fully Buildable Units:</strong> {{ buildResult.unitsBuildable }}</p>
+
+    <div *ngIf="buildResult.missing.length" class="mt-6 text-red-700">
+      <h3 class="font-semibold">Missing Parts:</h3>
+      <ul class="list-disc pl-6">
+        <li *ngFor="let m of buildResult.missing">
+          {{ m.quantity }} x {{ m.partType }} ({{ m.requiredLengthMM }}mm, profile {{ m.profile }})
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="buildResult.leftover.length" class="mt-6 text-gray-600">
+      <h3 class="font-semibold">Leftover Material:</h3>
+      <ul class="list-disc pl-6">
+        <li *ngFor="let scrap of buildResult.leftover">
+          Rod {{ scrap.rodId }}: {{ scrap.remainingMM }}mm remaining
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

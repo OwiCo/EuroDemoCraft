@@ -1,0 +1,165 @@
+<div class="p-6 max-w-screen-xl mx-auto">
+  <!-- Header + Create Button -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Sales Orders</h1>
+    <button class="bg-blue-600 text-white px-4 py-2 rounded shadow" (click)="showForm = true">+ Create Order</button>
+  </div>
+
+  <!-- Filters -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <input [(ngModel)]="filters.customer" placeholder="Filter by Customer" class="border p-2 rounded" />
+    <input [(ngModel)]="filters.salesOrderId" placeholder="Sales Order #" class="border p-2 rounded" />
+    <input [(ngModel)]="filters.date" type="date" class="border p-2 rounded" />
+    <select [(ngModel)]="filters.status" class="border p-2 rounded">
+      <option value="">All Statuses</option>
+      <option *ngFor="let s of statusOptions" [value]="s">{{ s }}</option>
+    </select>
+  </div>
+
+  <!-- Sales Orders Table -->
+  <table class="w-full text-left border-collapse bg-white shadow rounded">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="p-2 border">Order #</th>
+        <th class="p-2 border">Customer</th>
+        <th class="p-2 border">Status</th>
+        <th class="p-2 border">Delivery</th>
+        <th class="p-2 border">Total</th>
+        <th class="p-2 border">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of filteredOrders()" (click)="openDetails(order)" class="hover:bg-gray-100 cursor-pointer">
+        <td class="p-2 border">{{ order.id }}</td>
+        <td class="p-2 border">{{ order.customerName }}</td>
+        <td class="p-2 border">{{ order.status }}</td>
+        <td class="p-2 border">{{ order.deliveryDate | date }}</td>
+        <td class="p-2 border">{{ order.total | currency }}</td>
+        <td class="p-2 border space-x-2">
+          <button *ngIf="order.status === 'Confirmed'" (click)="startProduction(order.id); $event.stopPropagation()" class="text-sm px-2 py-1 bg-yellow-500 text-white rounded">Start</button>
+          <button *ngIf="order.status === 'In Progress'" (click)="markComplete(order.id); $event.stopPropagation()" class="text-sm px-2 py-1 bg-green-600 text-white rounded">Complete</button>
+          <button (click)="generatePDF(order); $event.stopPropagation()" class="text-sm px-2 py-1 border border-blue-600 text-blue-600 rounded hover:bg-blue-50">PDF</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Order Details Modal -->
+  <div *ngIf="showDetails && selectedOrder" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded w-full max-w-5xl max-h-[90vh] overflow-auto shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Sales Order Details</h2>
+        <button class="text-gray-500 hover:text-black text-xl" (click)="showDetails = false; selectedOrder = null">&times;</button>
+      </div>
+
+      <div class="space-y-2">
+        <p><strong>Order ID:</strong> {{ selectedOrder.id }}</p>
+        <p><strong>Customer:</strong> {{ selectedOrder.customerName }}</p>
+        <p><strong>Status:</strong> {{ selectedOrder.status }}</p>
+        <p><strong>Delivery Date:</strong> {{ selectedOrder.deliveryDate | date }}</p>
+        <p><strong>Created At:</strong> {{ selectedOrder.createdAt | date:'short' }}</p>
+      </div>
+
+      <hr class="my-4" />
+      <h3 class="text-lg font-semibold">Line Items</h3>
+
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left font-semibold border-b">
+            <th>Material</th>
+            <th>Qty</th>
+            <th>Unit</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+            <th>Cost</th>
+            <th>Profit</th>
+            <th>Components</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of selectedOrder.items" class="border-b">
+            <td>{{ item.material }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.unit }}</td>
+            <td>\${{ item.unitPrice.toFixed(2) }}</td>
+            <td>\${{ (item.unitPrice * item.quantity).toFixed(2) }}</td>
+            <td>\${{ (item.costPerUnit || 0) * item.quantity | number:'1.2-2' }}</td>
+            <td>\${{ getItemProfit(item) | number:'1.2-2' }}</td>
+            <td>{{ productComponentMap[item.material]?.parts?.join(', ') || '—' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="mt-4 text-right space-y-1 font-medium">
+        <p><strong>Subtotal:</strong> \${{ selectedOrder.subtotal.toFixed(2) }}</p>
+        <p><strong>Tax:</strong> \${{ selectedOrder.tax.toFixed(2) }}</p>
+        <p class="text-xl text-green-700 font-bold"><strong>Total:</strong> \${{ selectedOrder.total.toFixed(2) }}</p>
+        <p><strong>Total Cost:</strong> \${{ getTotalCost(selectedOrder) | number:'1.2-2' }}</p>
+        <p><strong>Total Profit:</strong> \${{ getTotalProfit(selectedOrder) | number:'1.2-2' }}</p>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button (click)="generatePDF(selectedOrder)" class="bg-blue-600 text-white px-4 py-2 rounded shadow">Generate PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Creation Modal -->
+  <div *ngIf="showForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded w-full max-w-6xl max-h-[90vh] overflow-auto shadow-lg">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Create Sales Order</h2>
+        <button class="text-gray-500 hover:text-black text-xl" (click)="showForm = false">&times;</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <input [(ngModel)]="form.customerName" placeholder="Customer Name" class="border p-2 rounded" />
+        <input [(ngModel)]="form.deliveryDate" type="date" class="border p-2 rounded" />
+        <select [(ngModel)]="form.status" class="border p-2 rounded">
+          <option *ngFor="let s of statusOptions" [value]="s">{{ s }}</option>
+        </select>
+        <input [value]="form.createdAt | date:'short'" disabled class="border p-2 rounded bg-gray-200" />
+      </div>
+
+      <h3 class="text-lg font-semibold">Line Items</h3>
+      <div class="grid grid-cols-6 gap-2 font-semibold my-2">
+        <div>Material</div>
+        <div>Qty</div>
+        <div>Unit</div>
+        <div>Unit Price</div>
+        <div>Total</div>
+        <div>Components & Cost</div>
+      </div>
+
+      <div *ngFor="let item of form.items; let i = index" class="grid grid-cols-6 gap-2 items-center mb-2">
+        <select [(ngModel)]="item.material" (ngModelChange)="onMaterialChange(item)" class="border p-2 rounded">
+          <option *ngFor="let p of productOptions" [value]="p">{{ p }}</option>
+        </select>
+        <input type="number" [(ngModel)]="item.quantity" class="border p-2 rounded" />
+        <input [(ngModel)]="item.unit" class="border p-2 rounded" />
+        <input type="number" [(ngModel)]="item.unitPrice" class="border p-2 rounded" />
+        <div>{{ (item.quantity * item.unitPrice) | currency }}</div>
+        <div class="text-xs text-gray-600">
+          <div><strong>Parts:</strong> {{ productComponentMap[item.material]?.parts?.join(', ') ?? '—' }}</div>
+          <div><strong>Unit Cost:</strong> {{ productComponentMap[item.material]?.costPerUnit ?? 0 | currency }}</div>
+          <div><strong>Item Profit:</strong> {{ getItemProfit(item) | currency }}</div>
+        </div>
+      </div>
+
+      <button (click)="addItem()" class="text-blue-600 underline mt-2">+ Add Item</button>
+
+      <hr class="my-4" />
+
+      <div class="text-right space-y-1 font-medium">
+        <p><strong>Subtotal:</strong> {{ getSubtotal() | currency }}</p>
+        <p><strong>Tax (7%):</strong> {{ getTax() | currency }}</p>
+        <p class="text-green-700 text-xl font-bold"><strong>Total:</strong> {{ getTotal() | currency }}</p>
+      </div>
+
+      <div class="flex justify-end gap-4 mt-4">
+        <button (click)="submitOrder()" class="bg-blue-600 text-white px-4 py-2 rounded shadow">Submit Order</button>
+        <button (click)="resetForm(); showForm = false" class="bg-gray-300 px-4 py-2 rounded shadow">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

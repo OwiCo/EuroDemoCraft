@@ -1,0 +1,16 @@
+<h2>Your Cart</h2>
+
+<p *ngIf="isEmpty">{{ cartEmpty }}</p>
+
+<div *ngIf="!isEmpty">
+  <table>
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+    </tr>
+    <tr *ngFor="let item of cart">
+      <td>{{ item.title }}</td>
+      <td>${{ item.price.value.toFixed(2) }} {{ item.price.currency }}</td>
+    </tr>
+  </table>
+</div>

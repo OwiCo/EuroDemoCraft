@@ -1,0 +1,29 @@
+<!-- Other input for testing Add-item-to-cart FE(see product.service for other)
+Simply press the button to add an item to the cart -->
+<button (click)="goBack()">go back</button>
+<div class="title">
+  <p>{{product.title}}</p>
+</div>
+<div class="center">
+  <div class="list">
+    <img [src]="product.image" width="auto" height="100">
+  </div>
+  <div class="list">
+    <p>Price: {{product.price.value}}</p>
+  </div>
+
+  <!-- Kyle's button -->
+  <button (click)="addToCart(product.asin)">Add to cart</button>
+  <div>
+    <button (click)="checkInventory()">Check Inventory</button>
+  </div>
+</div>
+<div class="details">
+
+  <div *ngIf="showInventory">
+    <p><span>Product name:</span> {{productView.name}}</p>
+    <p><span>Stock:</span> {{productView.inventory}}</p>
+    <div *ngIf="productView.description; else elseBlock"> {{productView.description}}</div>
+    <ng-template #elseBlock><span>Review:</span> No reviews yet.</ng-template>
+  </div>
+</div>

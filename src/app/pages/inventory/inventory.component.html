@@ -1,0 +1,42 @@
+<div class="p-6">
+  <h1 class="text-2xl font-bold mb-6">Inventory - Aluminum Rods</h1>
+
+  <table class="w-full text-left border-collapse mb-6">
+    <thead>
+      <tr class="border-b">
+        <th class="p-2">Rod ID</th>
+        <th class="p-2">Profile</th>
+        <th class="p-2">Finish</th>
+        <th class="p-2">Total Length (mm)</th>
+        <th class="p-2">Available (mm)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rod of rods" class="border-b">
+        <td class="p-2">{{ rod.id }}</td>
+        <td class="p-2">{{ rod.profile }}</td>
+        <td class="p-2">{{ rod.finish }}</td>
+        <td class="p-2">{{ rod.lengthMM }}</td>
+        <td class="p-2">{{ rod.availableLengthMM }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="text-lg font-semibold mb-2">Add New Rod</h2>
+  <form (ngSubmit)="addRod()" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <input [(ngModel)]="newRod.id" name="id" placeholder="ID" class="border p-2 rounded" />
+    <select [(ngModel)]="newRod.profile" name="profile" class="border p-2 rounded">
+      <option value="U">U</option>
+      <option value="C">C</option>
+      <option value="T">T</option>
+      <option value="Z">Z</option>
+    </select>
+    <input [(ngModel)]="newRod.lengthMM" name="lengthMM" type="number" placeholder="Length (mm)" class="border p-2 rounded" />
+    <select [(ngModel)]="newRod.finish" name="finish" class="border p-2 rounded">
+      <option value="Clear">Clear</option>
+      <option value="Bronze">Bronze</option>
+      <option value="Black">Black</option>
+    </select>
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded shadow">Add Rod</button>
+  </form>
+</div>

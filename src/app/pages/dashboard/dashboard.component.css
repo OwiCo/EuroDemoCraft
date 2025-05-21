@@ -1,0 +1,19 @@
+.dashboard-dark {
+  background-color: #1f2937; /* gray-800 */
+  color: #e5e7eb;            /* gray-200 */
+  min-height: 100vh;
+}
+
+.bg-panel-dark {
+  background-color: #111827; /* gray-900 */
+}
+
+.text-light {
+  color: #d1d5db;
+}
+
+.select-dark {
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-color: #374151;
+}

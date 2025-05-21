@@ -1,0 +1,121 @@
+<!-- Hero Section -->
+<section class="relative bg-gray-900 text-white pt-36 pb-24 font-sans">
+  <!-- Navbar -->
+  <nav class="absolute top-0 left-0 z-20 w-full flex items-center justify-between p-6 text-white">
+    <!-- Logo -->
+    <img src="https://www.eurocraft-usa.com/wp-content/uploads/2024/08/eurocraft-usa_logo.png" alt="Logo" class="h-12 md:h-16">
+
+    <!-- Navigation Links -->
+    <ul class="hidden md:flex space-x-6 text-sm font-semibold tracking-wide">
+      <li><a href="#" class="hover:text-yellow-400">ABOUT</a></li>
+      <li><a href="#" class="hover:text-yellow-400">PRODUCTS</a></li>
+      <li><a href="#" class="hover:text-yellow-400">GALLERY</a></li>
+      <li><a href="#" class="hover:text-yellow-400">BLOG</a></li>
+      <li><a href="#" class="hover:text-yellow-400">RESOURCES</a></li>
+    </ul>
+
+    <!-- Contact & Login Buttons -->
+    <div class="flex items-center space-x-4">
+      <div class="bg-white text-black px-3 py-1 rounded font-semibold text-sm hidden md:block">
+        (305) 722 8374
+      </div>
+      <button class="bg-white text-black px-4 py-2 rounded font-semibold text-sm hover:bg-gray-200">
+        GET A QUOTE
+      </button>
+      <button
+        type="button"
+        class="bg-yellow-400 text-black px-4 py-2 rounded font-semibold text-sm hover:bg-yellow-300 hidden md:block"
+        [routerLink]="['/login']">
+        DEALERS LOGIN
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 flex flex-col items-center justify-center text-center px-4">
+    <h1 class="text-4xl md:text-6xl font-bold text-yellow-300 leading-tight">
+      Premium Impact<br>Windows and Doors
+    </h1>
+    <p class="mt-4 max-w-2xl text-lg md:text-xl font-light">
+      Manufactured in the US, Eurocraft delivers custom-built, elegant Impact Windows and Doors with superior durability, energy efficiency, lasting performance, and timeless beauty.
+    </p>
+    <div class="mt-6 flex flex-wrap justify-center gap-4">
+      <button class="bg-white text-black px-6 py-2 rounded font-bold hover:bg-gray-200">GET A QUOTE</button>
+      <button class="text-yellow-300 border-b-2 border-yellow-300 hover:opacity-75 font-semibold">
+        BECOME A DEALER →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Divider -->
+<div class="h-12 bg-gray-100"></div>
+
+<!-- Services Section -->
+<section class="bg-gray-100 py-20">
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 text-center">
+    
+    <!-- Energy Efficient -->
+    <div>
+      <h4 class="text-sm uppercase font-medium text-gray-600 mb-2">German and American Engineered</h4>
+      <h3 class="text-xl font-semibold mb-4">Energy Efficient</h3>
+      <img src="https://www.eurocraft-usa.com/assets/images/energy.svg" alt="Energy Efficient Icon" class="mx-auto h-14 mb-4">
+      <p class="text-sm text-gray-700">
+        Our cutting-edge technology makes Eurocraft impact windows and doors exceptionally energy-efficient, soundproof, and incredibly robust, ensuring longevity and reliable performance.
+      </p>
+    </div>
+
+    <!-- Incredibly Strong -->
+    <div>
+      <h4 class="text-sm uppercase font-medium text-gray-600 mb-2">Hurricane and Burglary Protection</h4>
+      <h3 class="text-xl font-semibold mb-4">Incredibly Strong</h3>
+      <img src="https://www.eurocraft-usa.com/assets/images/strong.svg" alt="Strong Icon" class="mx-auto h-14 mb-4">
+      <p class="text-sm text-gray-700">
+        Our impact products are built for extreme climates, offering superior durability and functionality. They resist fading, corrosion, and wear while providing strong protection against intrusions.
+      </p>
+    </div>
+
+    <!-- Made in the USA -->
+    <div>
+      <h4 class="text-sm uppercase font-medium text-gray-600 mb-2">Custom-Built Solutions</h4>
+      <h3 class="text-xl font-semibold mb-4">Made in the USA</h3>
+      <img src="https://www.eurocraft-usa.com/assets/images/usa.svg" alt="Made in USA Icon" class="mx-auto h-14 mb-4">
+      <p class="text-sm text-gray-700">
+        Eurocraft’s windows and doors are proudly crafted by skilled American workers in our Miami plant with premium materials. They pass rigorous quality control, meeting the highest standards.
+      </p>
+    </div>
+
+    <!-- Simply Beautiful -->
+    <div>
+      <h4 class="text-sm uppercase font-medium text-gray-600 mb-2">Long-Lasting Performance</h4>
+      <h3 class="text-xl font-semibold mb-4">Simply Beautiful</h3>
+      <img src="https://www.eurocraft-usa.com/assets/images/beautiful.svg" alt="Simply Beautiful Icon" class="mx-auto h-14 mb-4">
+      <p class="text-sm text-gray-700">
+        Our impact products are elegant, exceptionally durable, and visually appealing. Available in a variety of finishes and colors, they remain both attractive and functional for years to come.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Counter Section -->
+<section class="bg-black text-yellow-400 py-16">
+  <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <div>
+      <h3 class="text-4xl font-bold"><span appCountUp [endVal]="25">0</span>+</h3>
+      <p class="text-sm text-white mt-2">Years of Experience</p>
+    </div>
+    <div>
+      <h3 class="text-4xl font-bold"><span appCountUp [endVal]="36000">0</span>+</h3>
+      <p class="text-sm text-white mt-2">Projects Completed</p>
+    </div>
+    <div>
+      <h3 class="text-4xl font-bold"><span appCountUp [endVal]="300">0</span>+</h3>
+      <p class="text-sm text-white mt-2">Employees</p>
+    </div>
+    <div>
+      <h3 class="text-4xl font-bold"><span appCountUp [endVal]="100">0</span>+</h3>
+      <p class="text-sm text-white mt-2">Dealer Locations</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+
+ .ftco-section {
+  padding: 7em 0; }
+
+  h3{
+  color:white!important;
+}
+ *::placeholder {
+  color: white !important;
+  opacity: 0.80!important;
+}
+.form-control {
+  background: transparent!important;
+  border: none!important;
+  height: 50px !important;
+  color: White !important;
+  border: 1px solid transparent !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-radius: 40px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  -webkit-transition: 0.3s!important;
+  -o-transition: 0.3s!important;
+  transition: 0.3s!important; }
+  .form-control:hover, .form-control:focus {
+    background: transparent!important;
+    outline: none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+    border-color: rgba(255, 255, 255, 0.4)!important; }
+  .form-control:focus {
+    border-color: rgba(255, 255, 255, 0.4)!important;
+   }
+
+.btn {
+  cursor: pointer;
+  border-radius: 40px;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  font-size: 15px;
+  text-transform: uppercase; }
+  .btn:hover, .btn:active, .btn:focus {
+    outline: none; }
+  .btn.btn-primary {
+    background: #fbceb5 !important;
+    border: 1px solid #fbceb5 !important;
+    color: #000 !important; }
+    .btn.btn-primary:hover {
+      border: 1px solid #fbceb5;
+      background: transparent;
+      color: #fbceb5; }
+    
+   
+        /*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+ /*# sourceMappingURL=bootstrap.min.css.map */

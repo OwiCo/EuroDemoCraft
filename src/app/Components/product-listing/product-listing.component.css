@@ -1,0 +1,28 @@
+a {
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  display: inline;
+  /* background-color: lightgray; */
+  height: 34px;
+  width: 120px;
+  padding: 10px;
+  margin-left: -10px;
+}
+
+h1 {
+  text-align: center;
+  color: black;
+}
+
+li {
+  list-style-type: none;
+  padding-bottom: 5px;
+  color: black;
+}
+
+img {
+  display: inline-block;
+}

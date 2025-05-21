@@ -1,0 +1,131 @@
+/* Function to close side bar */
+.closesidenav{
+  font-size:30px;
+  position:relative; 
+  left:190px;
+  cursor:pointer;
+  color:white;
+  background-color: Transparent;
+  background-repeat:no-repeat; 
+  border: none;
+  cursor:pointer; 
+  overflow: hidden; 
+}
+/* Function to open side bar */
+.opensidenav{
+  font-size:30px;
+  cursor:pointer;
+  color:black;
+  background-color: Transparent;
+  background-repeat:no-repeat; 
+  border: none;
+  cursor:pointer; 
+  overflow: hidden; 
+  visibility:visible;
+
+}
+/* Side nav attribute key pair */
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden; 
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav2 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden; 
+  transition: 0.5s;
+  padding-top: 60px;
+ 
+}
+
+.sidenav2 a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav2 a:hover {
+  color: #f1f1f1;
+}
+/* Toggle location and attributes for Darkmode */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  left:25px
+}
+
+/* Slider backdrop element in switch for Darkmode */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+/* Toggle Element */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+/* allows for animation of toggle */
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+/* Backdrop rounded */
+.slider.round {
+  border-radius: 34px;
+}
+/* toggle rounded */
+.slider.round:before {
+  border-radius: 50%;
+}

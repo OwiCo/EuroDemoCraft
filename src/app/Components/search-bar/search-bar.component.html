@@ -1,0 +1,5 @@
+<div class="search-bar">
+  <label for="search-box">Search</label>
+  <input #searchBox type="text" name="search-box" placeholder="Search for a product" class="searchBox" />
+  <a (click)="formatInput(searchBox.value)" routerLink="/productlist">Search</a>
+</div>

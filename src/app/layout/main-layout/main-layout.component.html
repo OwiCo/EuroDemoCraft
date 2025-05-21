@@ -1,0 +1,22 @@
+<div class="flex h-screen">
+  <!-- Sidebar -->
+<aside class="w-64 bg-gray-800 text-white p-4">
+    <div class="w-full h-24  flex items-center justify-center z-20">
+    <img src="assets/images/GlassForge3.png" alt="GlassForge Logo" class="h-12 md:h-16 object-contain" />
+  </div>
+  <nav class="space-y-2">
+    <a routerLink="/glassforge" class="block hover:bg-gray-700 px-2 py-1 rounded">GlassForge Home</a>
+    <a routerLink="/dashboard" class="block hover:bg-gray-700 px-2 py-1 rounded">Dashboard</a>
+    <a routerLink="/configurator" class="block hover:bg-gray-700 px-2 py-1 rounded">Configurator</a>
+    <a routerLink="/inventory" class="block hover:bg-gray-700 px-2 py-1 rounded">Inventory</a>
+    <a routerLink="/production-dashboard" class="block hover:bg-gray-700 px-2 py-1 rounded">Production</a>
+    <a routerLink="/sales-orders" class="block hover:bg-gray-700 px-2 py-1 rounded">Sales Orders</a>
+  </nav>
+</aside>
+
+
+  <!-- Main Content -->
+  <main class="flex-1 p-6 overflow-auto">
+    <router-outlet></router-outlet>
+  </main>
+</div>

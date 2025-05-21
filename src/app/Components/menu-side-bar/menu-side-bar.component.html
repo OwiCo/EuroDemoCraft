@@ -1,0 +1,38 @@
+<!-- Open Side Nav Button -->
+<button class="opensidenav" (click)="onMenu()">&#9776;</button>
+
+
+<!-- Unregistered Navigation bar -->
+<div [ngStyle]="{'width':widthVal}" class="sidenav">
+  <!-- Close side Nav Button -->
+  <button class="closesidenav" (click)="offMenu()">&#9776;</button>
+  <!-- Navigation links -->
+  <a href="">Home</a>
+  <a href="logincustomer()" routerLink="/login">Login</a>
+  <a href="registercustomer()" routerLink="/register">Register</a>
+  <br>
+  <!-- Toggle for potential Dark Mode CSS switch -->
+  <label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+  </label>
+
+</div>
+<!-- Dashboard Nav bar -->
+
+<div [ngStyle]="{'width':widthValdash}" class="sidenav2">
+  <!-- Close side Nav Button -->
+  <button class="closesidenav" (click)="offMenu()">&#9776;</button>
+  <!-- Navigation links -->
+  <a href="">Home</a>
+  <a href="" routerLink="/orders">Orders</a>
+  <a href="" routerLink="/settings">Settings</a>
+  <a href="" (click)="logout()">Logout</a>
+  <br>
+  <!-- Toggle for potential Dark Mode CSS switch -->
+  <label class="switch">
+    <input type="checkbox">
+    <span class="slider round"></span>
+  </label>
+
+</div>

@@ -1,0 +1,18 @@
+<a routerLink="..">Go back</a>
+
+<h1>Search Results for "{{ searchTerm }}"</h1>
+
+<ul>
+  <li *ngFor="let product of productlisting$">
+    <!-- <a routerLink="/product/:{{product.id}}"> -->
+    <p>
+      <a class="link-to-product" routerLink="/product/{{product.asin}}">
+        {{ product.title }}</a>
+      <br>
+      Price: ${{ product.price.value}} {{ product.price.currency }}
+      <br>
+      <img [src]="product.image" width="auto" height="100">
+    </p>
+    <!-- </a> -->
+  </li>
+</ul>

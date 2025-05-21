@@ -1,0 +1,59 @@
+<div class="p-6 space-y-8 max-w-screen-xl mx-auto dashboard-dark">
+  <!-- Filter Controls -->
+  <div class="flex flex-wrap gap-4 items-center mb-6">
+    <label class="text-sm font-medium">Period:</label>
+    <select [(ngModel)]="selectedPeriod" (change)="updateData()" class="select-dark border p-2 rounded">
+      <option value="today">Today</option>
+      <option value="month">This Month</option>
+      <option value="ytd">Year to Date</option>
+      <option value="fiscal">Fiscal Year</option>
+    </select>
+
+    <label class="text-sm font-medium">User:</label>
+    <select [(ngModel)]="selectedUser" (change)="updateData()" class="select-dark border p-2 rounded">
+      <option value="all">All</option>
+      <option *ngFor="let user of userList" [value]="user">{{ user }}</option>
+    </select>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-panel-dark p-5 shadow rounded text-center">
+      <h2 class="text-gray-400 text-sm mb-1">Total Orders</h2>
+      <p class="text-4xl font-bold text-white">{{ totalOrders }}</p>
+    </div>
+    <div class="bg-panel-dark p-5 shadow rounded text-center">
+      <h2 class="text-gray-400 text-sm mb-1">In Progress</h2>
+      <p class="text-4xl font-bold text-blue-400">{{ inProgress }}</p>
+    </div>
+    <div class="bg-panel-dark p-5 shadow rounded text-center">
+      <h2 class="text-gray-400 text-sm mb-1">Completed</h2>
+      <p class="text-4xl font-bold text-green-400">{{ completed }}</p>
+    </div>
+    <div class="bg-panel-dark p-5 shadow rounded text-center">
+      <h2 class="text-gray-400 text-sm mb-1">Inventory Rods</h2>
+      <p class="text-4xl font-bold text-white">{{ totalRods }}</p>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
+    <div class="bg-panel-dark p-4 shadow rounded">
+      <h2 class="text-lg font-semibold text-light mb-3">Order Status Distribution</h2>
+      <canvas baseChart
+              [data]="pieChartData"
+              [options]="pieChartOptions"
+              [type]="'pie'">
+      </canvas>
+    </div>
+
+    <div class="bg-panel-dark p-4 shadow rounded">
+      <h2 class="text-lg font-semibold text-light mb-3">Inventory vs Orders</h2>
+      <canvas baseChart
+              [data]="barChartData"
+              [options]="barChartOptions"
+              [type]="'bar'">
+      </canvas>
+    </div>
+  </div>
+</div>

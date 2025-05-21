@@ -1,0 +1,45 @@
+<div class="p-6 max-w-screen-xl mx-auto space-y-6 bg-gray-900 text-white min-h-screen">
+
+  <!-- Filters -->
+  <div class="flex gap-4 mb-4">
+    <input [(ngModel)]="filters.customer" class="border border-gray-700 bg-gray-800 text-white p-2 rounded" placeholder="Customer" />
+    <input [(ngModel)]="filters.material" class="border border-gray-700 bg-gray-800 text-white p-2 rounded" placeholder="Material" />
+    <input [(ngModel)]="filters.startDate" type="date" class="border border-gray-700 bg-gray-800 text-white p-2 rounded" />
+    <input [(ngModel)]="filters.endDate" type="date" class="border border-gray-700 bg-gray-800 text-white p-2 rounded" />
+  </div>
+
+  <!-- Kanban Columns -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div *ngFor="let status of statuses" class="bg-gray-800 p-4 rounded shadow min-h-[400px]">
+    <h2 class="text-lg font-bold mb-4">{{ status }}</h2>
+
+    <div
+      cdkDropList
+      [id]="status"
+      [cdkDropListData]="filteredOrdersByStatus(status)"
+      [cdkDropListConnectedTo]="statuses"
+      class="space-y-3 min-h-[300px]"
+      (cdkDropListDropped)="onDrop($event, status)"
+    >
+      <div
+        *ngFor="let order of filteredOrdersByStatus(status)"
+        class="bg-gray-700 border border-gray-600 rounded p-4 shadow"
+        cdkDrag
+      >
+        <p class="font-semibold">{{ order.id }} - {{ order.customerName }}</p>
+        <p class="text-sm text-gray-300">{{ order.deliveryDate | date }}</p>
+        <ul class="text-sm list-disc ml-4 mt-2">
+          <li *ngFor="let item of order.items">{{ item.material }} ({{ item.quantity }})</li>
+        </ul>
+
+        <input [(ngModel)]="order.assignedTo" class="mt-2 border bg-gray-800 border-gray-600 p-1 rounded w-full text-sm text-white" placeholder="Assign to..." />
+
+        <button (click)="generatePDF(order)" class="text-xs text-blue-400 mt-2 underline">
+          Export PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
